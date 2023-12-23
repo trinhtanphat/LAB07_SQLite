@@ -67,35 +67,47 @@ public class ToDoDAO {
         return check != -1;
     }
 
-//    public boolean updateToDo(ToDo toDo) {
-//        SQLiteDatabase database = dbHelper.getWritableDatabase();
-//        database.beginTransaction();
-//
-//        ContentValues values = new ContentValues();
-//
-//        values.put("TITLE", toDo.getTitle());
-//        values.put("CONTENT", toDo.getContent());
-//        values.put("DATE", toDo.getDate());
-//        values.put("TYPE", toDo.getType());
-//        values.put("STATUS", toDo.getStatus());
-//
-//        long check = database.update("TODO", null, values);
-//        return check != -1;
-//    }
+    public boolean updateToDo(ToDo toDo) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.beginTransaction();
 
-//    public boolean deleteToDo(ToDo toDo) {
-//        SQLiteDatabase database = dbHelper.getWritableDatabase();
-//        database.beginTransaction();
-//
-//        ContentValues values = new ContentValues();
-//
-//        values.put("TITLE", toDo.getTitle());
-//        values.put("CONTENT", toDo.getContent());
-//        values.put("DATE", toDo.getDate());
-//        values.put("TYPE", toDo.getType());
-//        values.put("STATUS", toDo.getStatus());
-//
-//        long check = database.update("TODO", null, values);
-//        return check != -1;
-//    }
+        ContentValues values = new ContentValues();
+
+        values.put("TITLE", toDo.getTitle());
+        values.put("CONTENT", toDo.getContent());
+        values.put("DATE", toDo.getDate());
+        values.put("TYPE", toDo.getType());
+        values.put("STATUS", toDo.getStatus());
+
+        // Assuming "ID" is the primary key of your TODO table
+        String whereClause = "ID = ?";
+        String[] whereArgs = {String.valueOf(toDo.getId())};
+
+        int rowsAffected = database.update("TODO", values, whereClause, whereArgs);
+
+        // Commit the transaction
+        database.setTransactionSuccessful();
+        database.endTransaction();
+
+        return rowsAffected > 0;
+    }
+
+
+    public boolean deleteToDo(ToDo toDo) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.beginTransaction();
+
+        // Assuming "ID" is the primary key of your TODO table
+        String whereClause = "ID = ?";
+        String[] whereArgs = {String.valueOf(toDo.getId())};
+
+        // Delete the row from the "TODO" table
+        int rowsAffected = database.delete("TODO", whereClause, whereArgs);
+
+        // Commit the transaction
+        database.setTransactionSuccessful();
+        database.endTransaction();
+
+        return rowsAffected > 0;
+    }
 }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
+    android:id="@+id/parent_layout"
     android:padding="16dp">
 
     <TextView
@@ -17,22 +18,34 @@
         android:textStyle="bold"/>
 
     <EditText
+        android:id="@+id/idInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:textSize="20sp" />
+
+    <EditText
         android:id="@+id/titleInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
+        android:inputType="textNoSuggestions"
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/contentInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Content"
+        android:inputType="textNoSuggestions"
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/dateInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Date"
+        android:inputType="textNoSuggestions"
         android:textSize="20sp" />
 
     <EditText
@@ -40,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type"
+        android:inputType="textNoSuggestions"
         android:textSize="20sp" />
 
     <LinearLayout
